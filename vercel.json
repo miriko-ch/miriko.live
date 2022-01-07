@@ -8,5 +8,10 @@
       "source": "/space",
       "destination": "https://space.bilibili.com/7564991"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/box", "destination": "https://box.lonelyion.com/_/miriko"
+    }
   ]
 }
