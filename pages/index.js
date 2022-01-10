@@ -23,12 +23,12 @@ export default function Home() {
           <Col lg={6} md={8} className="mx-auto">
             
             <Image src={AvatarImage} width={120} height={120} layout="fixed" 
-                   className={styles.avatar}/>
+                   className={styles.avatar} alt="Avatar"/>
             <h1 className="pt-2">海离Channel</h1>
             <div className="lead text-muted" id="p-sign">
               <div className="center-container">
                 你好！我是个人势VUP
-                <Image src={SquareLogo} width={18} height={18} />
+                <Image src={SquareLogo} width={18} height={18} alt="Site Logo"/>
               </div>
             </div>
             <div className='py-3'>
@@ -36,17 +36,17 @@ export default function Home() {
               <img className={styles.statBadge + " mx-1"} src="https://bilistats.lonelyion.com/followers?uid=7564991&label=粉丝数" alt="Followers"/>
             </div>
             <>
-              <a href="https://space.bilibili.com/7564991" target="_blank"
+              <a href="https://space.bilibili.com/7564991" target="_blank" rel="noreferrer"
                  className="btn btn-outline-info my-2">
                 <FontAwesomeIcon icon={faBilibili} />
                 {' '}主页
               </a>{' '}
-              <a href="https://live.bilibili.com/449047" target="_blank"
+              <a href="https://live.bilibili.com/449047" target="_blank" rel="noreferrer"
                  className="btn btn-outline-warning my-2">
                 <FontAwesomeIcon icon={faBilibili} />
                 {' '}直播间
               </a>{' '}
-              <a href="https://twitter.com/miriko_ch" target="_blank"
+              <a href="https://twitter.com/miriko_ch" target="_blank" rel="noreferrer"
                  className="btn btn-outline-primary my-2">
                 <FontAwesomeIcon icon={faTwitter} />
                 {' '}Twitter
