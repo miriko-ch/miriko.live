@@ -1,0 +1,12 @@
+.container {
+  padding: 0 2rem;
+}
+
+.avatar {
+  border: medium solid #DFDFDF !important;
+  border-radius: 50% !important;
+}
+
+.stat-badge {
+  max-height: 20px;
+}
