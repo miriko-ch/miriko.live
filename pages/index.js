@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import styles from '../styles/home.module.css'
+
+import { Container, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBilibili, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
@@ -14,9 +15,8 @@ export default function Home() {
     <>
       <Head>
         <title>海离Miriko</title>
-        <meta name="description" content="你好，我是VUP海离" />
-        <link rel="icon" href="/img/square_logo.png" />
       </Head>
+      
 
       <Container className="py-5 text-center" as="header">
         <Row className="py-lg-5">
@@ -50,7 +50,7 @@ export default function Home() {
                  className="btn btn-outline-primary my-2">
                 <FontAwesomeIcon icon={faTwitter} />
                 {' '}Twitter
-              </a>{' '}
+              </a>
             </>
           </Col>
         </Row>
