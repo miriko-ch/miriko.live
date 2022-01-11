@@ -2,7 +2,7 @@
   "name": "miriko-home",
   "private": true,
   "license": "MIT",
-  "author": "海离 <b@rubble.com> (http://barnyrubble.tumblr.com/)",
+  "author": "海离Channel",
   "homepage": "https://github.com/miriko-channel/miriko-home",
   "scripts": {
     "dev": "next dev",
@@ -19,6 +19,7 @@
     "next": "12.0.7",
     "react": "17.0.2",
     "react-bootstrap": "^2.1.0",
+    "react-circle": "^1.1.1",
     "react-dom": "17.0.2"
   },
   "devDependencies": {

@@ -10,6 +10,10 @@
   border-top: 1px solid #eaeaea;
 }
 
+.footer a {
+  color: darkgrey;
+}
+
 .footer a p {
   display: flex;
   justify-content: center;
