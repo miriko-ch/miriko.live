@@ -20,16 +20,16 @@ export default function Box() {
       if (processing) return "正在提交...";
       return "提交棉花糖";
     });
-    setAlertOpen(() => {
+    setAlertOpen(a => {
       if (processing) return false;
-      return alertOpen;
+      return a;
     })
   }, [processing]);
 
   function showAlert(content, type, timeout = 0) {
     setAlertContent(content);
     setAlertType(type);
-    if(timeout != 0) {
+    if (timeout != 0) {
       setTimeout(() => setAlertOpen(false), timeout);
     }
     setAlertOpen(true);
@@ -44,36 +44,26 @@ export default function Box() {
         window.grecaptcha
           .execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: "submit_candy" })
           .then(async (token) => {
-            /* send data to the server */
-            const body = {
-              recaptcha_token: token
-            };
             try {
-              const response = await fetch('/api/recaptcha', {
-                method: "POST",
+              const response = await fetch('/api/questions/item', {
+                method: "PUT",
                 headers: { "Content-Type": "application/json;charset=utf-8" },
-                body: JSON.stringify(body)
+                body: JSON.stringify({
+                  owner: '61dd92d865764aa2c3060134',
+                  content: text.trim(),
+                  recaptcha: token
+                })
               });
-              if (response.ok) {
-                const recaptcha_verify = (await response.json()).recaptchaJson;
-                console.log(recaptcha_verify);
-                if (recaptcha_verify.success && recaptcha_verify.score >= 0.1) {
-                  const response = await fetch('/api/questions/item', {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json;charset=utf-8" },
-                    body: JSON.stringify({
-                      owner: '61dd92d865764aa2c3060134',
-                      content: text.trim()
-                    })
-                  });
-                  const create_data = await response.json();
-                  console.log(create_data);
-                  if (create_data.result == 'ok') {
-                    setText('');
-                    showAlert('提交成功！', 'success');
-                  }
+              if (response) {
+                const create_data = await response.json();
+                console.log(create_data);
+                if (create_data.result == 'success') {
+                  setText('');
+                  showAlert('提交成功！', 'success');
+                } else if (create_data.result == 'recaptcha_fail') {
+                  showAlert('提交失败了：\nreCAPTCHA验证失败，请不要搞事，谢谢', 'warning');
                 } else {
-                  throw new Error('请不要搞事情，谢谢');
+                  showAlert('提交失败了：\n' + JSON.stringify(create_data.result), 'warning');
                 }
               } else {
                 throw new Error(response.statusText);
@@ -87,7 +77,7 @@ export default function Box() {
             showAlert('提交失败了：\n' + err.message, 'danger');
             setProcessing(false);
           });
-        
+
       });
     } else {
       showAlert('无法连接到reCAPTCHA服务，请尝试联系网站管理员', 'warning');
@@ -136,8 +126,8 @@ export default function Box() {
             </Form>
             <Collapse in={alertOpen} className="py-1">
               <div>
-                <Alert variant={ alertType }>
-                  { alertContent }
+                <Alert variant={alertType}>
+                  {alertContent}
                 </Alert>
               </div>
             </Collapse>
