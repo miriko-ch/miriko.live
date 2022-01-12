@@ -2,38 +2,47 @@ import Head from "next/head";
 import Script from 'next/script'
 
 import { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Alert, Collapse } from "react-bootstrap";
 import { Circle } from "react-circle";
 import styles from "../styles/box.module.css";
 
 export default function Box() {
   const [text, setText] = useState('');
-  const [submit, setSubmit] = useState("REGISTER");
+  const [buttonText, setButtonText] = useState("提交棉花糖");
   const [processing, setProcessing] = useState(false);
-  const [completed, setCompleted] = useState(false);
-  const [result, setResult] = useState({});
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertType, setAlertType] = useState('info');
+  const [alertContent, setAlertContent] = useState('');
   const max_len = 1000;
 
   useEffect(() => {
-    setSubmit(() => {
-      if (completed) return "RESET";
-      if (processing) return "PROCESSING";
-      return "REGISTER";
+    setButtonText(() => {
+      if (processing) return "正在提交...";
+      return "提交棉花糖";
     });
-  }, [processing, completed]);
+    setAlertOpen(() => {
+      if (processing) return false;
+      return alertOpen;
+    })
+  }, [processing]);
+
+  function showAlert(content, type, timeout = 0) {
+    setAlertContent(content);
+    setAlertType(type);
+    if(timeout != 0) {
+      setTimeout(() => setAlertOpen(false), timeout);
+    }
+    setAlertOpen(true);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('handleSubmit: ' + text);
-    if (completed) {
-      setCompleted(false);
-      setText('');
-      setResult({});
-    } else {
-      setProcessing(true);
+    setProcessing(true);
+    if (window.grecaptcha) {
       window.grecaptcha.ready(() => {
         window.grecaptcha
-          .execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: "submit" })
+          .execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, { action: "submit_candy" })
           .then(async (token) => {
             /* send data to the server */
             const body = {
@@ -42,26 +51,49 @@ export default function Box() {
             try {
               const response = await fetch('/api/recaptcha', {
                 method: "POST",
-                headers: { "Content-Type": "application/json;chaset=utf-8" },
+                headers: { "Content-Type": "application/json;charset=utf-8" },
                 body: JSON.stringify(body)
               });
               if (response.ok) {
-                const json = await response.json();
-                setResult(json);
-                setCompleted(true);
+                const recaptcha_verify = (await response.json()).recaptchaJson;
+                console.log(recaptcha_verify);
+                if (recaptcha_verify.success && recaptcha_verify.score >= 0.1) {
+                  const response = await fetch('/api/questions/item', {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json;charset=utf-8" },
+                    body: JSON.stringify({
+                      owner: '61dd92d865764aa2c3060134',
+                      content: text.trim()
+                    })
+                  });
+                  const create_data = await response.json();
+                  console.log(create_data);
+                  if (create_data.result == 'ok') {
+                    setText('');
+                    showAlert('提交成功！', 'success');
+                  }
+                } else {
+                  throw new Error('请不要搞事情，谢谢');
+                }
               } else {
                 throw new Error(response.statusText);
               }
             } catch (err) {
-              setResult({ message: err.message });
+              showAlert('提交失败了：\n' + err.message, 'danger');
             }
+            setProcessing(false);
           })
           .catch((err) => {
-            setResult({ message: err.message });
+            showAlert('提交失败了：\n' + err.message, 'danger');
+            setProcessing(false);
           });
-        setProcessing(false);
+        
       });
+    } else {
+      showAlert('无法连接到reCAPTCHA服务，请尝试联系网站管理员', 'warning');
+      setProcessing(false);
     }
+
   };
 
   return (
@@ -88,25 +120,28 @@ export default function Box() {
                 </Row>
                 <Form.Control as="textarea"
                   rows={5} maxLength={max_len}
-                  placeholder="初见 可爱 单推 结婚"
+                  placeholder="初见 可爱 单推"
                   onChange={(e) => setText(e.target.value)}
+                  value={text}
                 />
               </Form.Group>
               <div className="text-center py-2">
-
                 <Button id="submitButton"
                   variant="primary" type="submit"
-                  className="text-center">
-                  提交棉花糖
+                  className="text-center"
+                  disabled={processing || text.trim().length == 0}>
+                  {buttonText}
                 </Button>
               </div>
             </Form>
+            <Collapse in={alertOpen} className="py-1">
+              <div>
+                <Alert variant={ alertType }>
+                  { alertContent }
+                </Alert>
+              </div>
+            </Collapse>
           </Col>
-        </Row>
-        <Row>
-          <div>
-            { JSON.stringify(result, undefined, 2) }
-          </div>
         </Row>
       </Container>
     </>

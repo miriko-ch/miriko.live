@@ -1,4 +1,6 @@
-export default async (req, res) => {
+//route => /api/recaptcha
+
+export default async function recaptcha(req, res) {
   const SECRET_KEY = process.env.RECAPTCHA_SECRETKEY;
   const { recaptcha_token } = req.body;
   const verifyUrl = `https://www.recaptcha.net/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${recaptcha_token}`;
