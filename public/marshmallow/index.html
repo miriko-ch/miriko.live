@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>棉花糖生成器 | マシュマロ</title>
+  <link rel="icon" href="./logo.png" type="image/x-icon">
+  <link rel="stylesheet" media="all" href="./style.css">
+  <link href="./marshmallow_files/font1.css" rel="stylesheet" class="__web-inspector-hide-shortcut__">
+  <link href="./marshmallow_files/font2.css" rel="stylesheet">
+  <link href="./marshmallow_files/font3.css" rel="stylesheet">
+  <script type="text/javascript" src="./html2canvas.js"></script>
+
+  <style type="text/css">
+    body::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function isShowTrans() {
+      onTextChange();
+      var isHidden = true;
+      if (document.getElementById("check-show-trans").checked == true) { isHidden = false; };
+      document.getElementById("split-line").hidden = isHidden;
+      document.getElementById("p-trans").hidden = isHidden;
+    };
+
+    function onTextChange() {
+      document.getElementById("p-src").innerHTML = document.getElementById("text-src").value;
+      document.getElementById("p-trans").innerHTML = document.getElementById("text-trans").value;
+    };
+
+    function generate() {
+      window.pageYoffset = 0;
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      html2canvas(document.getElementById("message-card")).then(function (canvas) {
+        var oA = document.createElement("a");
+        oA.download = "marshmallow-" + Date.now();
+        url = canvas.toDataURL("image/jpeg");
+        oA.href = url;
+        document.body.appendChild(oA);
+        oA.click();
+        oA.remove();
+      });
+    };
+
+    window.onload = function () {
+      document.getElementById("text-src").addEventListener("input", function () { onTextChange() });
+      document.getElementById("text-trans").addEventListener("input", function () { onTextChange() });
+    };
+
+  </script>
+
+</head>
+
+<body class="bg-light">
+  <main class="container mt-3" id="marshmallow" style="overflow:auto">
+    <div id="marshmallow-card" class="card">
+      <div class="message-card-wrapper">
+        <div id="message-card" class="message-card" style="transform-origin: left top; transform: scale(0.996667);">
+          <div class="message-card__body">
+            <div class="message-card__text-wrapper" style="padding:0">
+              <div class="message-card__text">
+                <p id="p-src" style="margin:0;padding:0">这里是原文</p>
+                <hr id="split-line">
+                <p id="p-trans" style="margin:0;padding:0">这里是翻译</p>
+              </div>
+            </div>
+            <div class="message-card__brand-wrapper">棉花糖 / マシュマロ</div>
+          </div>
+          <div class="message-card__logo-wrapper">
+            <img class="message-card__logo" src="./rice.png">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      原文内容：<br>
+      <textarea id="text-src" rows="3" style="width:100%"></textarea><br>
+      翻译内容：<br>
+      <textarea id="text-trans" rows="3" width="100%" style="width:100%"></textarea><br>
+      <input type="checkbox" id="check-show-trans" checked="true" onclick="isShowTrans()"> 显示翻译内容<br>
+      <input type="button" value="生成棉花糖" onclick="generate()"><br>
+      <span style="font-size:9pt">1.输入内容，点击"生成棉花糖"即可下载图片。<br>2.使用手机浏览时画面可能会显示不全，建议在浏览器内选择"切换到桌面版"。<br>3.如需网页源码，请<a
+          href="./marshmallow_generator.zip">点此下载</a>。</span>
+    </div>
+  </main>
+</body>
+
+</html>
