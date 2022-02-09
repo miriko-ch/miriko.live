@@ -9,8 +9,8 @@ import { faBilibili, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 import AvatarImage from '../public/img/avatar.jpg'
 import SquareLogo from '../public/img/square_logo.png'
-import FullUniform from '../public/img/full-body/school_uniform.png'
-import FullTechwear from '../public/img/full-body/techwear.png'
+import FullUniform from '../public/img/character/school_uniform.png'
+import FullTechwear from '../public/img/character/techwear.png'
 
 export default function Home() {
   return (
@@ -56,22 +56,18 @@ export default function Home() {
             </Col>
           </Row>
         </section>
-        <section id="about">
+        <section id="about" className="py-4">
           <h2>简介</h2>
           <small className="text-muted">Introduction</small>
-          <Row className="py-lg-5">
+          <Row className="py-2">
             <Col lg={6} className={styles.aboutContent + " mx-auto"}>
-              <p>
-              你好，这里是VUP海离，感谢关注！是隐藏于人类中的虚拟JK，也是执行者，不过正在沉迷游戏和看其他VUP（逃）。<br />
-              现在有两套衣服，一套是JK制服，一套是执行任务的机能风制服哦。背后背的<strong>不是空调</strong>！<br />
-              <br />
-              直播会偶尔打打游戏，并不擅长FPS所以会玩玩别的比如WoWs、WT、明日方舟等，也有可能直播编程/学习/摸鱼，同样由于目前生活环境不稳定直播频率也未知，能播就播。
-              <br />
-              视频的话想做知识区科技区的VUP，不过一切都在起步阶段更新频率未知，有空就会更新（可恶，就是没空）。
-              </p>
-              <ul className="clearfix">
+              <p>你好，这里是VUP海离，感谢关注！是隐藏于人类中的虚拟JK，也是执行者，不过正在沉迷游戏和看其他VUP（逃）。</p>
+              <p>现在有两套衣服，一套是JK制服，一套是执行任务的机能风制服哦。背后背的<strong>不是空调</strong>！</p>
+              <p>直播会偶尔打打游戏，并不擅长FPS所以会玩玩别的比如WoWs、WT、明日方舟等，也有可能直播编程/学习/摸鱼，同样由于目前生活环境不稳定直播频率也未知，能播就播。</p>
+              <p>视频的话想做知识区科技区的VUP，不过一切都在起步阶段更新频率未知，有空就会更新（可恶，就是没空）。</p>
+              <ul className="">
                 <li><span>生日</span>21 May</li>
-                <li><span>坐标</span>虚拟Neptune</li>
+                <li><span>坐标</span>Virtual Neptune</li>
                 <li><span>擅长语言</span>C/C++(?)</li>
                 <li><span>喜欢的食物</span>辣椒 火锅</li>
                 <li><span>喜好</span>吃饭睡觉打游戏看视频收钱花钱最后才是编程</li>
@@ -79,13 +75,15 @@ export default function Home() {
                 <li><span>瞳色</span>绿色</li>
               </ul>
             </Col>
-            <Col xl={3} lg={4} className="mx-auto">
+            <Col xl={4} lg={5} className="">
               <Carousel variant="dark" className={styles.bodies} indicators={false}>
                 <Carousel.Item>
-                  <Image src={FullUniform} width={300} height={400} alt="初始JK制服立绘" />
+                  <img className={styles.characterImage} src="/img/character/school_uniform.png" alt="初始JK制服立绘"/>
+                  <div className={styles.frame} />
                 </Carousel.Item>
                 <Carousel.Item>
-                  <Image src={FullTechwear} width={300} height={400} alt="机能风立绘" />
+                  <img className={styles.characterImage} src="/img/character/techwear.png" alt="初始JK制服立绘"/>
+                  <div className={styles.frame} />
                 </Carousel.Item>
               </Carousel>
             </Col>

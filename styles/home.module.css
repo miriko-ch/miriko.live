@@ -19,9 +19,12 @@
   font-family: serif;
 }
 
-.aboutContent ul {
+.aboutContent > p {
+  text-indent: 1em;
+}
+
+.aboutContent > ul {
   list-style: none;
-  column-count: 2;
 }
 
 .aboutContent li > span {
@@ -33,13 +36,34 @@
 }
 
 .bodies {
-  outline: solid 0px #7086b6;
   box-shadow: 0 10px 30px transparent;
-  transition: outline 0.5s ease,
-              box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease;
 }
 
 .bodies:hover {
-  outline: solid 10px #7086b6;
-  box-shadow: 0 10px 30px black;
+  box-shadow: 0 10px 30px gray;
 }
+
+.characterImage {
+  width: 100%;
+  max-width: 750px;
+  object-fit: contain;
+}
+
+.frame {
+  border: solid 0px rgba(112, 134, 182, 0.88);
+  box-shadow: 0 5px 15px transparent;
+  transition: border-width 0.5s ease;
+  display: flex;
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 16px;
+  bottom: 16px;
+}
+
+.frame:hover {
+  border-width: 12px;
+  box-shadow: 0 5px 15px rgba(112, 134, 182, 0.50);
+}
+
