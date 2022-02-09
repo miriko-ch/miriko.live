@@ -10,3 +10,36 @@
 .statBadge {
   max-height: 20px;
 }
+
+.aboutContent {
+  color: #7d88b1;
+  white-space: pre-line;
+  text-align: left;
+  line-height: 200%;
+  font-family: serif;
+}
+
+.aboutContent ul {
+  list-style: none;
+  column-count: 2;
+}
+
+.aboutContent li > span {
+  color: #445476;
+}
+
+.aboutContent li > span::after {
+  content: "： ";
+}
+
+.bodies {
+  outline: solid 0px #7086b6;
+  box-shadow: 0 10px 30px transparent;
+  transition: outline 0.5s ease,
+              box-shadow 0.5s ease;
+}
+
+.bodies:hover {
+  outline: solid 10px #7086b6;
+  box-shadow: 0 10px 30px black;
+}
