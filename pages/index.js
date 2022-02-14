@@ -1,18 +1,45 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useState, useEffect } from "react";
 
 import styles from '../styles/home.module.css'
 
 import { Container, Row, Col, Carousel } from 'react-bootstrap'
+import { Parallax, Background } from 'react-parallax';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBilibili, faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 import AvatarImage from '../public/img/avatar.jpg'
 import SquareLogo from '../public/img/square_logo.png'
-import FullUniform from '../public/img/character/school_uniform.png'
-import FullTechwear from '../public/img/character/techwear.png'
+import CharacterUniform from '../public/img/character/school_uniform.png'
+import CharacterTechwear from '../public/img/character/techwear.png'
+
+function LiveData() {
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/bilibili')
+      .then(res => res.json())
+      .then(json => {
+        setData(json);
+        setLoading(false);
+      })
+  }, []);
+
+  if (isLoading) return <small className="text-muted">计算中...</small>
+  if (!data) return <small className="text-muted">没有数据</small>
+  return (
+    <div>
+      <small className="text-muted">海离子现在共有 {data.followers} 只</small>
+    </div>
+  )
+}
 
 export default function Home() {
+  const blueBlur = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkqDtWDwADjwHFOfCdBwAAAABJRU5ErkJggg==';
+
   return (
     <>
       <Head>
@@ -20,41 +47,43 @@ export default function Home() {
       </Head>
       <Container className="py-5 text-center" as="header">
         <section id="head">
-          <Row className="py-lg-5">
-            <Col lg={6} md={8} className="mx-auto">
-              
-              <Image src={AvatarImage} width={120} height={120} layout="fixed" 
-                    className={styles.avatar} alt="Avatar"/>
-              <h1 className="pt-2">海离Channel</h1>
-              <div className="lead text-muted" id="p-sign">
-                <div className="center-container">
-                  你好！我是个人势VUP
-                  <Image src={SquareLogo} width={18} height={18} alt="Site Logo"/>
+          <Parallax bgImage='/img/character/techwear_q.png' blur={10} strength={-300}>
+            <Row className={"py-lg-5 " + styles.headContainer}>
+              <Col lg={6} md={8} className="mx-auto">
+                <Image src={AvatarImage} width={120} height={120} layout="fixed"
+                  className={styles.avatar} alt="Avatar" placeholder="blur" quality={90} />
+                <h1 className="pt-2">海离Channel</h1>
+                <div className="lead text-muted" id="p-sign">
+                  <div className="center-container">
+                    你好！我是个人势VUP
+                    <Image src={SquareLogo} width={18} height={18} alt="Site Logo" />
+                  </div>
                 </div>
-              </div>
-              <div className='py-3'>
-                <img className={styles.statBadge + " mx-1"} src="https://bilistats.lonelyion.com/live_status?uid=7564991&label=状态" alt="Live Status"/>
-                <img className={styles.statBadge + " mx-1"} src="https://bilistats.lonelyion.com/followers?uid=7564991&label=粉丝数" alt="Followers"/>
-              </div>
-              <>
-                <a href="https://space.bilibili.com/7564991" target="_blank" rel="noreferrer"
-                  className="btn btn-outline-info my-2">
-                  <FontAwesomeIcon icon={faBilibili} />
-                  {' '}主页
-                </a>{' '}
-                <a href="https://live.bilibili.com/449047" target="_blank" rel="noreferrer"
-                  className="btn btn-outline-warning my-2">
-                  <FontAwesomeIcon icon={faBilibili} />
-                  {' '}直播间
-                </a>{' '}
-                <a href="https://twitter.com/miriko_ch" target="_blank" rel="noreferrer"
-                  className="btn btn-outline-primary my-2">
-                  <FontAwesomeIcon icon={faTwitter} />
-                  {' '}Twitter
-                </a>
-              </>
-            </Col>
-          </Row>
+                <div className="pt-3">
+                  <a href="https://space.bilibili.com/7564991" target="_blank" rel="noreferrer"
+                    className="btn btn-outline-info my-2">
+                    <FontAwesomeIcon icon={faBilibili} />
+                    {' '}主页
+                  </a>{' '}
+                  <a href="https://live.bilibili.com/449047" target="_blank" rel="noreferrer"
+                    className="btn btn-outline-warning my-2">
+                    <FontAwesomeIcon icon={faBilibili} />
+                    {' '}观看直播
+                  </a>{' '}
+                  <a href="https://twitter.com/miriko_ch" target="_blank" rel="noreferrer"
+                    className="btn btn-outline-primary my-2">
+                    <FontAwesomeIcon icon={faTwitter} />
+                    {' '}Twitter
+                  </a>
+                </div>
+                <div className='py-1'>
+                  <LiveData />
+                  {/* <img className={styles.statBadge + " mx-1"} src="https://bilistats.lonelyion.com/live_status?uid=7564991&label=状态" alt="Live Status"/>
+                  <img className={styles.statBadge + " mx-1"} src="https://bilistats.lonelyion.com/followers?uid=7564991&label=粉丝数" alt="Followers"/> */}
+                </div>
+              </Col>
+            </Row>
+          </Parallax>
         </section>
         <section id="about" className="py-4">
           <h2>简介</h2>
@@ -78,11 +107,17 @@ export default function Home() {
             <Col xl={4} lg={5} className="">
               <Carousel variant="dark" className={styles.bodies} indicators={false}>
                 <Carousel.Item>
-                  <img className={styles.characterImage} src="/img/character/school_uniform.png" alt="初始JK制服立绘"/>
+                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <Image className={styles.characterImage} src={CharacterUniform} alt="初始JK制服立绘" placeholder="blur" quality={100} />
+                  </div>
+                  {/* <img className={styles.characterImage} src="/img/character/school_uniform.png" alt="初始JK制服立绘"/> */}
                   <div className={styles.frame} />
                 </Carousel.Item>
                 <Carousel.Item>
-                  <img className={styles.characterImage} src="/img/character/techwear.png" alt="初始JK制服立绘"/>
+                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                    <Image className={styles.characterImage} src={CharacterTechwear} alt="机能风制服立绘" placeholder="blur" quality={100} />
+                  </div>
+                  {/* <img className={styles.characterImage} src="/img/character/techwear.png" alt="机能风制服立绘"/> */}
                   <div className={styles.frame} />
                 </Carousel.Item>
               </Carousel>
