@@ -2,13 +2,18 @@
   padding: 0 2rem;
 }
 
+.parallaxContent {
+  width: 100%;
+  height: 100%;
+  background: 
+   linear-gradient(to top right, transparent 50%,#445476 50.1%) top right/40px 40px no-repeat,
+   linear-gradient(to bottom left, transparent 50%,#546a99 50.1%) bottom left/36px 36px no-repeat;
+  overflow: hidden;
+}
+
 .headContainer {
-  --triangle: #445476;
   width: 100%; 
   height: 100%; 
-  background: 
-   linear-gradient(to top right, transparent 50%,var(--triangle) 50.1%) top right/40px 40px no-repeat,
-   linear-gradient(to bottom left, transparent 50%,var(--triangle) 50.1%) bottom left/40px 40px no-repeat;
   overflow: hidden;
 }
 

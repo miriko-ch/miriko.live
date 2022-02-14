@@ -47,8 +47,8 @@ export default function Home() {
       </Head>
       <Container className="py-5 text-center" as="header">
         <section id="head">
-          <Parallax bgImage='/img/character/techwear_q.png' blur={10} strength={-300}>
-            <Row className={"py-lg-5 " + styles.headContainer}>
+          <Parallax bgImage='/img/character/techwear_q.png' blur={10} strength={-300} contentClassName={styles.parallaxContent}>
+            <Row className={"py-5 g-0" + styles.headContainer}>
               <Col lg={6} md={8} className="mx-auto">
                 <Image src={AvatarImage} width={120} height={120} layout="fixed"
                   className={styles.avatar} alt="Avatar" placeholder="blur" quality={90} />
