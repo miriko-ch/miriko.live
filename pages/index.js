@@ -5,41 +5,29 @@ import { useState, useEffect } from "react";
 import styles from '../styles/home.module.css'
 
 import { Container, Row, Col, Carousel } from 'react-bootstrap'
-import { Parallax, Background } from 'react-parallax';
+import { Parallax } from 'react-parallax';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBilibili, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faBilibili } from '@fortawesome/free-brands-svg-icons'
+import { faCirclePlay } from '@fortawesome/free-regular-svg-icons'
 
 import AvatarImage from '../public/img/avatar.jpg'
 import SquareLogo from '../public/img/square_logo.png'
 import CharacterUniform from '../public/img/character/school_uniform.png'
 import CharacterTechwear from '../public/img/character/techwear.png'
 
-function LiveData() {
-  const [data, setData] = useState(null);
+export default function Home() {
+  const [accInfo, setAccInfo] = useState(null);
   const [isLoading, setLoading] = useState(false);
-
   useEffect(() => {
     setLoading(true);
-    fetch('/api/bilibili')
+    fetch('/api/info')
       .then(res => res.json())
       .then(json => {
-        setData(json);
+        setAccInfo(json);
         setLoading(false);
       })
   }, []);
-
-  if (isLoading) return <small className="text-muted">计算中...</small>
-  if (!data) return <small className="text-muted">没有数据</small>
-  return (
-    <div>
-      <small className="text-muted">海离子现在共有 {data.followers} 只</small>
-    </div>
-  )
-}
-
-export default function Home() {
-  const blueBlur = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkqDtWDwADjwHFOfCdBwAAAABJRU5ErkJggg==';
-
+  
   return (
     <>
       <Head>
@@ -61,26 +49,39 @@ export default function Home() {
                 </div>
                 <div className="pt-3">
                   <a href="https://space.bilibili.com/7564991" target="_blank" rel="noreferrer"
-                    className="btn btn-outline-info my-2">
-                    <FontAwesomeIcon icon={faBilibili} />
-                    {' '}主页
-                  </a>{' '}
-                  <a href="https://live.bilibili.com/449047" target="_blank" rel="noreferrer"
-                    className="btn btn-outline-warning my-2">
-                    <FontAwesomeIcon icon={faBilibili} />
-                    {' '}观看直播
-                  </a>{' '}
-                  <a href="https://twitter.com/miriko_ch" target="_blank" rel="noreferrer"
                     className="btn btn-outline-primary my-2">
-                    <FontAwesomeIcon icon={faTwitter} />
-                    {' '}Twitter
+                    <FontAwesomeIcon icon={faBilibili} />
+                    {' '}Bilibili主页
+                  </a>{' '}
+                  <a href="https://www.acfun.cn/u/61330786" target="_blank" rel="noreferrer"
+                    className="btn btn-outline-danger my-2">
+                      <svg style={{ height: '1em', verticalAlign: '-.125em' }} version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000">
+                        <g>
+                        <path fill="#F54A58" d="M477.7,40.4L10,811.5l233.8,148l48.5-166.1l371-28l96.3,183.8L990,811.5L477.7,40.4z M382.2,616.8l88.5-195.1l99.7,195.1H382.2z"/>
+                        </g>
+                      </svg>
+                    {' '}AcFun主页
+                  </a>{' '}
+                  <a target="_blank" rel="noreferrer"
+                    className={ "btn my-2 " + ( accInfo && (accInfo.bili.live || accInfo.acfun.live) ? "btn-outline-success" : "btn-outline-secondary") }
+                    href={ accInfo && accInfo.acfun.live ? 'https://live.acfun.cn/live/61330786' : 'https://live.bilibili.com/449047' }>
+                    <FontAwesomeIcon icon={faCirclePlay} />
+                    {' '}{ accInfo && (accInfo.bili.live || accInfo.acfun.live) ? '观看直播' : '当前未开播'}
                   </a>
                 </div>
                 <div className='py-1'>
-                  <LiveData />
-                  {/* <img className={styles.statBadge + " mx-1"} src="https://bilistats.lonelyion.com/live_status?uid=7564991&label=状态" alt="Live Status"/>
-                  <img className={styles.statBadge + " mx-1"} src="https://bilistats.lonelyion.com/followers?uid=7564991&label=粉丝数" alt="Followers"/> */}
-                </div>
+                  {
+                    isLoading
+                    ? <small className="text-muted">计算中...</small>
+                    : !accInfo
+                      ? <small className="text-muted">没有数据</small>
+                      : <div>
+                          <small className="text-muted">海离子现在共有{' '}
+                          <span title="Bilibili">{accInfo.bili.followers}</span>{' + '}<span title="AcFun">{accInfo.acfun.followers}</span>
+                          {' '}只</small>
+                        </div>
+                  }
+                  </div>
               </Col>
             </Row>
           </Parallax>
