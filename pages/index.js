@@ -55,7 +55,7 @@ export default function Home() {
                   </a>{' '}
                   <a href="https://www.acfun.cn/u/61330786" target="_blank" rel="noreferrer"
                     className="btn btn-outline-danger my-2">
-                      <svg style={{ height: '1em', verticalAlign: '-.125em' }} version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000">
+                      <svg style={{ height: '1em', verticalAlign: '-.125em' }} version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000">
                         <g>
                         <path fill="#F54A58" d="M477.7,40.4L10,811.5l233.8,148l48.5-166.1l371-28l96.3,183.8L990,811.5L477.7,40.4z M382.2,616.8l88.5-195.1l99.7,195.1H382.2z"/>
                         </g>
