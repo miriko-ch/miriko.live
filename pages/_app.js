@@ -4,13 +4,15 @@ import Head from 'next/head'
 import Layout from '../components/layout'
 import { SSRProvider } from 'react-bootstrap'
 import { config } from '@fortawesome/fontawesome-svg-core'
+import { SWRConfig } from "swr";
+import fetchJson from "../lib/fetchJson";
 import '@fortawesome/fontawesome-svg-core/styles.css'
 
 config.autoAddCss = false
 
 function MyApp({ Component, pageProps }) {
-  //return <Component {...pageProps} />
-  return(
+  if(Component.customLayout) return Component.customLayout(<Component {...pageProps} />)
+  else return(
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,9 +20,18 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/img/square_logo.png" />
       </Head>
       <SSRProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <SWRConfig
+          value={{
+            fetcher: fetchJson,
+            onError: (err) => {
+              console.error(err);
+            },
+          }}
+        >
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SWRConfig>
       </SSRProvider>
     </>
   )

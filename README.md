@@ -1,6 +1,6 @@
 # Miriko Home
 
-海离Channel的主页
+海离Channel的主页，包含提问箱
 
 ## Getting Started
 
@@ -15,8 +15,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Thanks to
 
-在布局、内容等方面参考了以下网页的设计，非常感谢有这么好的前端作品：
+在布局、内容等方面参考了以下网页的设计，非常感谢有这么好的作品：
 
 + [雪狐冰屋 xuehusang.cn](https://www.xuehusang.cn)
 + [白雪艾莉娅 shirayuki-aria.club](https://shirayuki-aria.club/)
-
++ [NekoBox](https://github.com/NekoWheel/NekoBox)

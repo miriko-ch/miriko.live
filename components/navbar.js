@@ -22,7 +22,7 @@ export default function NavBar() {
               <NavDropdown.Item href="https://github.com/miriko-channel" target="_blank">GitHub</NavDropdown.Item>
               <NavDropdown.Item href="https://url.miriko.live" target="_blank">短链生成</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#admin">后台</NavDropdown.Item>
+              <NavDropdown.Item href="/user">用户后台</NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

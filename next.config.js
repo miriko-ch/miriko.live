@@ -1,7 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['bilistats.lonelyion.com'],
+    domains: ['bilistats.lonelyion.com', 'miriko.live'],
   },
   async redirects() {
     return [
