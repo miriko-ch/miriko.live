@@ -61,6 +61,7 @@
 .bodies {
   box-shadow: 0 10px 30px transparent;
   transition: box-shadow 0.5s ease;
+  background-color: transparent;
 }
 
 .bodies:hover {
@@ -69,8 +70,10 @@
 
 .characterImage {
   width: 100%;
-  max-width: 750px;
-  object-fit: contain;
+  max-width: 800px;
+  object-fit: cover;
+  padding: 0;
+  margin: 0;
 }
 
 .frame {

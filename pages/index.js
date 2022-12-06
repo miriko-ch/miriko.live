@@ -107,7 +107,7 @@ export default function Home() {
           <Row className="py-2">
             <Col lg={6} className={styles.aboutContent + " mx-auto"}>
               <p>你好，这里是战斗系VUP海离，是隐藏于人类中的虚拟JK，也是传说中的执行者，不过正在沉迷游戏和看其他VUP（逃）。</p>
-              <p>现在有两套Live2D，一套是JK制服，一套是执行任务的机能风制服哦。背后背的<strong>不是空调</strong>！</p>
+              <p>现在有两套Live2D形象，一套是日常的JK制服，一套是执行任务的机能风制服。背后背的<strong>不是空调</strong>！</p>
               <p>直播会偶尔打打游戏，主要玩战争雷霆（War Thunder）、战舰世界（World of Warships）等，周末有一定概率掉落杂谈回。直播时间一般是晚上，暂时没有固定的直播时间表，想播就播。</p>
               <p>视频投稿会不定期更新一些知识区科技区的内容，大多数跟计算机和数码相关，不过一切都在起步阶段更新频率未知，有空就会做视频。其实想做的方向很多，挖了很多坑<del>但是都没有填过</del>。</p>
               <ul className="">
@@ -155,7 +155,7 @@ export default function Home() {
               <Row>
                 {[...Array(VideoListItemsCount)].map((x, i) =>
                   <Col lg={4} md={6} sm={6}>
-                    <VideoCard v={videoList[i]} />
+                    <VideoCard v={videoList[i]} key={i}/>
                   </Col>
                 )}
               </Row>
