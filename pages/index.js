@@ -154,8 +154,8 @@ export default function Home() {
               :
               <Row>
                 {[...Array(VideoListItemsCount)].map((x, i) =>
-                  <Col lg={4} md={6} sm={6}>
-                    <VideoCard v={videoList[i]} key={i}/>
+                  <Col lg={4} md={6} sm={6} key={i}>
+                    <VideoCard v={videoList[i]} />
                   </Col>
                 )}
               </Row>
