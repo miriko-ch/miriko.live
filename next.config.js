@@ -1,7 +1,18 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ['bilistats.lonelyion.com', 'miriko.live'],
+    remotePatterns: [
+      {
+        hostname: '**.lonelyion.com',
+      },
+      {
+        hostname: '**.miriko.live',
+      },
+      {
+        protocol: 'http',
+        hostname: '**.hdslb.com',
+      },
+    ]
   },
   async redirects() {
     return [
@@ -17,4 +28,12 @@ module.exports = {
       }
     ]
   },
+  async rewrites() {
+    return [
+      {
+        source: '/bili_imgs/:path*',
+        destination: 'https://:path*',
+      },
+    ]
+  }
 }

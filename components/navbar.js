@@ -19,7 +19,7 @@ export default function NavBar() {
             <Link href="/box" passHref><Nav.Link>提问箱</Nav.Link></Link>
             <Link href="https://eat.miriko.live" passHref><Nav.Link target="_blank">吃掉海离小游戏</Nav.Link></Link>
             <NavDropdown title="更多" id="basic-nav-dropdown">
-              <NavDropdown.Item href="https://github.com/miriko-channel" target="_blank">GitHub</NavDropdown.Item>
+              <NavDropdown.Item href="https://github.com/miriko-ch" target="_blank">GitHub</NavDropdown.Item>
               <NavDropdown.Item href="https://url.miriko.live" target="_blank">短链生成</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/user">用户后台</NavDropdown.Item>

@@ -39,11 +39,11 @@
   white-space: pre-line;
   text-align: left;
   line-height: 200%;
-  font-family: serif;
+  font-family: 'Noto Sans SC', 'Noto Sans CJK SC', sans-serif;
 }
 
 .aboutContent > p {
-  text-indent: 1em;
+  text-indent: 1.5em;
 }
 
 .aboutContent > ul {
