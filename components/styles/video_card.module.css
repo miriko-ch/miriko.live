@@ -1,30 +1,62 @@
-.vcard {
+.coverImageContainer {
   position: relative;
-  margin-top: 30px;
-}
-
-.coverImage {
-  height: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.coverImage img {
+  top: 0;
+  left: 0;
   width: 100%;
+  margin: 5% auto;
+  padding: 0;
   overflow: hidden;
 }
 
+.coverImageContainer:hover .overlay {
+  opacity: 1;
+}
+
+.coverImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: .5s cubic-bezier(.17, .67, .83, .67);
+  backface-visibility: hidden;
+}
+
 .overlay {
-  visibility: hidden;
+  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(71,78,105, 0.66);
+  background-color: rgba(71, 78, 105, 0.66);
+  transition: .5s cubic-bezier(.17, .67, .83, .67);
+  text-align: center;
+
+  display: table;
+}
+
+.overlayContent {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 12px;
 }
 
 .overlayTitle {
   color: white;
+  text-align: center;
+}
+
+.overlayLinkIcon {
+  width: 40px;
+  height: 40px;
+  color: white;
+  background-color: transparent;
+  border: 2px solid whitesmoke;
+  border-radius: 50%;
+  padding: 5px;
+  transition: .3s cubic-bezier(.17, .67, .83, .67);
+}
+
+.overlayLinkIcon:hover {
+  background-color: white;
+  color: rgba(71, 78, 105, 1);
 }

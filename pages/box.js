@@ -91,7 +91,7 @@ export default function Box() {
       <Head>
         <title>海离的提问箱</title>
       </Head>
-      <Script strategy="beforeInteractive" src={`https://www.recaptcha.net/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`} />
+      <Script src={`https://www.recaptcha.net/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`} />
       <Container className="py-5" as="header">
         <Row className="py-lg-5">
           <Col lg={8} md={10} className="mx-auto">

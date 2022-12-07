@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 import styles from '../styles/home.module.css'
 
-import { Container, Row, Col, Carousel } from 'react-bootstrap'
+import { Button, Container, Row, Col, Carousel } from 'react-bootstrap'
 import { Parallax } from 'react-parallax';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBilibili } from '@fortawesome/free-brands-svg-icons'
@@ -122,13 +122,13 @@ export default function Home() {
               <Carousel variant="dark" className={styles.bodies} indicators={false}>
                 <Carousel.Item>
                   {/* <div className={styles.Im} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}> */}
-                    <Image className={styles.characterImage} src={CharacterUniform} alt="初始JK制服立绘" placeholder="blur" quality={100}/>
+                  <Image className={styles.characterImage} src={CharacterUniform} alt="初始JK制服立绘" placeholder="blur" quality={100} />
                   {/* </div> */}
                   <div className={styles.frame} />
                 </Carousel.Item>
                 <Carousel.Item>
                   {/* <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}> */}
-                    <Image className={styles.characterImage} src={CharacterTechwear} alt="机能风制服立绘" placeholder="blur" quality={100}/>
+                  <Image className={styles.characterImage} src={CharacterTechwear} alt="机能风制服立绘" placeholder="blur" quality={100} />
                   {/* </div> */}
                   <div className={styles.frame} />
                 </Carousel.Item>
@@ -139,16 +139,15 @@ export default function Home() {
         <section id="videos">
           <h2>最新投稿</h2>
           <small className='text-muted'>Latest Updates</small>
-          <Row className='py-2'>
-            <p className={[styles.aboutContent, styles.textCenter]}>喜欢海离的话就点一下关注吧^_^<br />希望大家看视频的时候可以多发弹幕&评论，这样就知道怎么改进啦！</p>
+          <Row className='pt-1 pb-2'>
+            <p className={[styles.aboutContent, styles.textCenter].join(' ')}>喜欢海离的话就点一下关注吧^_^<br />希望大家看视频的时候可以多发弹幕&评论，这样就知道怎么改进啦！</p>
           </Row>
-
           {isVideoLoading ?
             <p>正在获取最新投稿...</p>
             : !videoList ?
               <p>没有数据</p>
               :
-              <Row className="mx-5 px-5">
+              <Row className={styles.textCenter}>
                 {[...Array(VideoListItemsCount)].map((x, i) =>
                   <Col lg={3} md={5} sm={5} key={i}>
                     <VideoCard v={videoList[i]} />
@@ -156,6 +155,10 @@ export default function Home() {
                 )}
               </Row>
           }
+          <Row>
+            <a href="https://space.bilibili.com/7564991" target="_blank" rel="noreferrer"
+              className={"btn btn-outline-primary mx-auto " + styles.moreVideoButton}>更多视频</a>
+          </Row>
 
         </section>
       </Container>

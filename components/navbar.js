@@ -10,15 +10,15 @@ export default function NavBar() {
       <Container>
         <Navbar.Brand href="/">
           {/* <div style={{ position: 'relative', width: '120px', height: '30px' }}> */}
-          <Image className={styles.iconImage + ' nav-icon'} src={Logo} alt="海离Channel LOGO" placeholder="blur" quality={100}/>
+          <Image className={styles.iconImage + ' nav-icon'} src={Logo} alt="海离Channel LOGO" quality={100}/>
           {/* </div> */}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link href="/" passHref as="Nav.Link">主页</Link>
-            <Link href="/box" passHref><Nav.Link>提问箱</Nav.Link></Link>
-            <Link href="https://eat.miriko.live" passHref><Nav.Link target="_blank">吃掉海离小游戏</Nav.Link></Link>
+            <Link href="/" className="nav-link">主页</Link>
+            <Link href="/box" className="nav-link">提问箱</Link>
+            <Link href="https://eat.miriko.live" target="_blank" className="nav-link">吃掉海离小游戏</Link>
             <NavDropdown title="更多" id="basic-nav-dropdown">
               <NavDropdown.Item href="https://github.com/miriko-ch" target="_blank">GitHub</NavDropdown.Item>
               <NavDropdown.Item href="https://url.miriko.live" target="_blank">短链生成</NavDropdown.Item>
