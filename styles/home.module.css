@@ -22,6 +22,11 @@
   border-radius: 50% !important;
 }
 
+.acfunIcon {
+  height: 1em;
+  vertical-align: -.125em;
+}
+
 .statBadgeContainer {
   display: flex;
   flex-direction: row;
@@ -70,6 +75,7 @@
 
 .characterImage {
   width: 100%;
+  height: 100%;
   max-width: 800px;
   object-fit: cover;
   padding: 0;
@@ -93,3 +99,6 @@
   box-shadow: 0 5px 15px rgba(112, 134, 182, 0.50);
 }
 
+.textCenter {
+  text-align: center;
+}

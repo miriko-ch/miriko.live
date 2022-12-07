@@ -9,6 +9,7 @@ import useUser from '../lib/useUser'
 import fetchJson from '../lib/fetchJson'
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap"
 import Logo from '../public/img/miriko_v2_web.png'
+import NavStyles from './styles/navbar.module.css'
 
 
 export default function AdminLayout({ children }) {
@@ -32,9 +33,7 @@ export default function AdminLayout({ children }) {
         <Navbar bg="light" expand="lg" sticky="top">
           <Container>
             <Navbar.Brand href="/">
-              <div style={{ position: 'relative', width: '120px', height: '30px' }}>
-                <Image className="nav-icon" src={Logo} layout="fill" objectFit="contain" alt="海离Channel LOGO" placeholder="blur" quality={100}/>
-              </div>
+              <Image className={NavStyles.iconImage + ' nav-icon'} src={Logo} alt="海离Channel LOGO" placeholder="blur" quality={100}/>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">

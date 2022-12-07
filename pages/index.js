@@ -11,8 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBilibili } from '@fortawesome/free-brands-svg-icons'
 import { faCirclePlay } from '@fortawesome/free-regular-svg-icons'
 
-
-
 import AvatarImage from '../public/img/avatar.jpg'
 import SquareLogo from '../public/img/square_logo.png'
 import CharacterUniform from '../public/img/character/invisible_watermark_school_uniform.jpg'
@@ -41,7 +39,7 @@ export default function Home() {
       })
   }, []);
 
-  const VideoListItemsCount = 6;
+  const VideoListItemsCount = 8;
 
   return (
     <>
@@ -53,7 +51,7 @@ export default function Home() {
           <Parallax bgImage='/img/character/techwear_q.png' blur={10} strength={-300} contentClassName={styles.parallaxContent}>
             <Row className={"py-5 g-0" + styles.headContainer}>
               <Col lg={6} md={8} className="mx-auto">
-                <Image src={AvatarImage} width={120} height={120} layout="fixed"
+                <Image src={AvatarImage} width={120} height={120}
                   className={styles.avatar} alt="Avatar" placeholder="blur" quality={90} />
                 <h1 className="pt-2">海离Channel</h1>
                 <div className="lead text-muted" id="p-sign">
@@ -70,7 +68,7 @@ export default function Home() {
                   </a>{' '}
                   <a href="https://www.acfun.cn/u/61330786" target="_blank" rel="noreferrer"
                     className="btn btn-outline-danger my-2">
-                    <svg style={{ height: '1em', verticalAlign: '-.125em' }} version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000">
+                    <svg className={styles.acfunIcon} version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000">
                       <g>
                         <path fill="#F54A58" d="M477.7,40.4L10,811.5l233.8,148l48.5-166.1l371-28l96.3,183.8L990,811.5L477.7,40.4z M382.2,616.8l88.5-195.1l99.7,195.1H382.2z" />
                       </g>
@@ -123,28 +121,26 @@ export default function Home() {
             <Col xl={4} lg={5} className="">
               <Carousel variant="dark" className={styles.bodies} indicators={false}>
                 <Carousel.Item>
-                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  {/* <div className={styles.Im} style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}> */}
                     <Image className={styles.characterImage} src={CharacterUniform} alt="初始JK制服立绘" placeholder="blur" quality={100}/>
-                  </div>
-                  {/* <img className={styles.characterImage} src="/img/character/school_uniform.png" alt="初始JK制服立绘"/> */}
+                  {/* </div> */}
                   <div className={styles.frame} />
                 </Carousel.Item>
                 <Carousel.Item>
-                  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  {/* <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}> */}
                     <Image className={styles.characterImage} src={CharacterTechwear} alt="机能风制服立绘" placeholder="blur" quality={100}/>
-                  </div>
-                  {/* <img className={styles.characterImage} src="/img/character/techwear.png" alt="机能风制服立绘"/> */}
+                  {/* </div> */}
                   <div className={styles.frame} />
                 </Carousel.Item>
               </Carousel>
             </Col>
           </Row>
         </section>
-        <section id="pub">
+        <section id="videos">
           <h2>最新投稿</h2>
           <small className='text-muted'>Latest Updates</small>
           <Row className='py-2'>
-            <p className={styles.aboutContent} style={{ textAlign: 'center' }}>喜欢海离的话就点一下关注吧^_^<br />希望大家看视频的时候可以多发弹幕&评论，这样就知道怎么改进啦！</p>
+            <p className={[styles.aboutContent, styles.textCenter]}>喜欢海离的话就点一下关注吧^_^<br />希望大家看视频的时候可以多发弹幕&评论，这样就知道怎么改进啦！</p>
           </Row>
 
           {isVideoLoading ?
@@ -152,9 +148,9 @@ export default function Home() {
             : !videoList ?
               <p>没有数据</p>
               :
-              <Row>
+              <Row className="mx-5 px-5">
                 {[...Array(VideoListItemsCount)].map((x, i) =>
-                  <Col lg={4} md={6} sm={6} key={i}>
+                  <Col lg={3} md={5} sm={5} key={i}>
                     <VideoCard v={videoList[i]} />
                   </Col>
                 )}
