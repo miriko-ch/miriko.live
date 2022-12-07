@@ -156,7 +156,7 @@ export default function Home() {
               </Row>
           }
           <Row>
-            <a href="https://space.bilibili.com/7564991" target="_blank" rel="noreferrer"
+            <a href="https://space.bilibili.com/7564991/video" target="_blank" rel="noreferrer"
               className={"btn btn-outline-primary mx-auto " + styles.moreVideoButton}>更多视频</a>
           </Row>
 
