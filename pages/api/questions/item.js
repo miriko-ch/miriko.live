@@ -56,9 +56,11 @@ export default async function questions_item(req, res) {
             })
           );
         } else {
+          console.log("1")
           res.status(400).json({ result: 'recaptcha_fail' });
         }
       } catch(e) {
+        console.log("2")
         res.status(400).json({ result: e.error });
       }
   }
