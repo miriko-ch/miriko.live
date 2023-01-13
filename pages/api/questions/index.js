@@ -14,7 +14,7 @@ export default async function questions(req, res) {
   const collection = await db.collection('questions');
   const { owner } = req.query;
   console.log(owner);
-  const questions = await collection.findOne({
+  const questions = await collection.find({
     owner: helper.getObjectId(owner)
   }).sort({
     created_time: -1    //按创建时间降序

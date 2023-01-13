@@ -8,7 +8,7 @@ import useUser from "../../lib/useUser";
 export default function AdminLogin() {
   // here we just check if user is already logged in and redirect to profile
   const { mutateUser } = useUser({
-    redirectTo: "/user/profile",
+    redirectTo: "/user",
     redirectIfFound: true,
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -21,7 +21,7 @@ export default function AdminLogin() {
       username: e.currentTarget.username.value,
       password: hash.digest('hex')
     };
-    console.log(body);
+    //console.log(body);
     try {
       mutateUser(
         await fetchJson("/api/user/login", {
@@ -44,7 +44,7 @@ export default function AdminLogin() {
         <Row lg={8}>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>用户名/电子邮箱</Form.Label>
+              <Form.Label>电子邮箱</Form.Label>
               <Form.Control type="email" name="username" />
             </Form.Group>
 

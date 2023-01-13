@@ -26,7 +26,6 @@ export default async function questions_item(req, res) {
         res.status(400).json({ result: 'Missing Parameter(s)' });
         return;
       }
-      //首先验证reCAPTCHA
       const SECRET_KEY = process.env.RECAPTCHA_SECRETKEY;
       const VERIFY_URL = `https://www.recaptcha.net/recaptcha/api/siteverify?secret=${SECRET_KEY}&response=${recaptcha}`;
       try {
@@ -40,6 +39,7 @@ export default async function questions_item(req, res) {
             created_time: now,
             updated_time: now,
             deleted_time: null,
+            choose: false,
             content: content,
             answer: ''
           }).then(
