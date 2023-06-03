@@ -21,6 +21,7 @@ export default function Home() {
   const [isAccountLoading, setAccountLoading] = useState(false);
   const [videoList, setVideoList] = useState(null);
   const [isVideoLoading, setVideoLoading] = useState(false);
+  const [videoListError, setVideoListError] = useState(false);
   useEffect(() => {
     setAccountLoading(true);
     fetch('/api/info')
@@ -31,10 +32,15 @@ export default function Home() {
       });
 
     setVideoLoading(true);
+    setVideoListError(false);
     fetch('/api/latest_updates')
       .then(res => res.json())
       .then(json => {
-        setVideoList(json);
+        if(json.code === 0) {
+          setVideoList(json.data.list.vlist);
+        } else {
+          setVideoListError(true);
+        }
         setVideoLoading(false);
       })
   }, []);
@@ -109,7 +115,7 @@ export default function Home() {
               <p>直播会偶尔打打游戏，主要玩战争雷霆（War Thunder）、战舰世界（World of Warships）等，周末有一定概率掉落杂谈回。直播时间一般是晚上，暂时没有固定的直播时间表，想播就播。</p>
               <p>视频投稿会不定期更新一些知识区科技区的内容，大多数跟计算机和数码相关，不过一切都在起步阶段更新频率未知，有空就会做视频。其实想做的方向很多，挖了很多坑<del>但是都没有填过</del>。</p>
               <ul className="">
-                <li><span>生日</span>21 May</li>
+                <li><span>生日</span>20 May</li>
                 <li><span>坐标</span>Virtual Neptune</li>
                 <li><span>擅长语言</span>C/C++(?)C#(??)</li>
                 <li><span>喜欢的食物</span>辣椒 火锅</li>
@@ -144,8 +150,8 @@ export default function Home() {
           </Row>
           {isVideoLoading ?
             <p>正在获取最新投稿...</p>
-            : !videoList ?
-              <p>没有数据</p>
+            : (!videoList || videoListError) ?
+              <p>没有数据，可能是API出问题了...</p>
               :
               <Row className={styles.textCenter}>
                 {[...Array(VideoListItemsCount)].map((x, i) =>
