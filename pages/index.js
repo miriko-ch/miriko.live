@@ -72,20 +72,11 @@ export default function Home() {
                     <FontAwesomeIcon icon={faBilibili} />
                     {' '}Bilibili主页
                   </a>{' '}
-                  <a href="https://www.acfun.cn/u/61330786" target="_blank" rel="noreferrer"
-                    className="btn btn-outline-danger my-2">
-                    <svg className={styles.acfunIcon} version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000">
-                      <g>
-                        <path fill="#F54A58" d="M477.7,40.4L10,811.5l233.8,148l48.5-166.1l371-28l96.3,183.8L990,811.5L477.7,40.4z M382.2,616.8l88.5-195.1l99.7,195.1H382.2z" />
-                      </g>
-                    </svg>
-                    {' '}AcFun主页
-                  </a>{' '}
                   <a target="_blank" rel="noreferrer"
-                    className={"btn my-2 " + (accInfo && (accInfo.bili.live || accInfo.acfun.live) ? "btn-outline-success" : "btn-outline-secondary")}
-                    href={accInfo && accInfo.acfun.live ? 'https://live.acfun.cn/live/61330786' : 'https://live.bilibili.com/449047'}>
+                    className={"btn my-2 " + (accInfo && accInfo.bili.live ? "btn-outline-success" : "btn-outline-secondary")}
+                    href="https://live.bilibili.com/449047">
                     <FontAwesomeIcon icon={faCirclePlay} />
-                    {' '}{accInfo && (accInfo.bili.live || accInfo.acfun.live) ? '观看直播' : '当前未开播'}
+                    {' '}{accInfo && accInfo.bili.live ? '观看直播' : '当前未开播'}
                   </a>
                 </div>
                 <div className='py-1'>
@@ -96,7 +87,7 @@ export default function Home() {
                         ? <small className="text-muted">没有数据</small>
                         : <div>
                           <small className="text-muted">海离子现在共有{' '}
-                            <span title="Bilibili">{accInfo.bili.followers}</span>{' + '}<span title="AcFun">{accInfo.acfun.followers}</span>
+                            <span title="Bilibili粉丝数">{accInfo.bili.followers}</span>
                             {' '}只</small>
                         </div>
                   }

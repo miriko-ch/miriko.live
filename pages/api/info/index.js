@@ -17,21 +17,11 @@ export default async function bili_followers(req, res) {
   let master_json = await response.json();
   bili_followers = master_json.data.follower_num;
 
-  response = await fetch('https://live.acfun.cn/api/live/info?authorId=61330786');
-  let acfun_json = await response.json();
-  ac_followers = acfun_json.user.fanCountValue;
-  if("liveId" in acfun_json) ac_live_status = true;
-  else ac_live_status = false;
-
   res.setHeader('Cache-Control', 'max-age=0, s-maxage=900');
   res.status(200).json({
     bili: {
       live: bili_live_status,
       followers: bili_followers
-    },
-    acfun: {
-      live: ac_live_status,
-      followers: ac_followers
     }
   });
 }

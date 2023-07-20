@@ -9,8 +9,7 @@ export default async function bili_latest_updates(req, res) {
   }
 
   const wbi_keys = await getWbiKeys()
-  const query = encWbi(
-    {
+  const query = encWbi({
       mid: 7564991,
       pn: 1,
       ps: 8

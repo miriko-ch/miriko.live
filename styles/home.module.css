@@ -23,11 +23,6 @@
   object-fit: cover;
 }
 
-.acfunIcon {
-  height: 1em;
-  vertical-align: -.125em;
-}
-
 .statBadgeContainer {
   display: flex;
   flex-direction: row;
